@@ -266,6 +266,13 @@ spfy        = spfy25 * exp(log(0.75).*qt);
 % "Dark" Respiration
 Rd          = RdPerVcmax25 * Vcmax25 .* exp(log(1.8).*qt) ./(1+exp(1.3*(T-Trdm)));
 
+%% initializations (these are overwritten further down in the code and should not affect output)
+Vc = 0.0;
+Vs = 0.0;
+Ve = 0.0;
+CO2_per_electron = 1./6.;
+Ag = 1.0;
+
 %% calculation of potential electron transport rate
 if isempty(po0)  % JAK 2015-12: User can specify po0 from measured data
     po0     = Kp./(Kf+Kd+Kp);         % maximum dark photochemistry fraction, i.e. Kn = 0 (Genty et al., 1989)
