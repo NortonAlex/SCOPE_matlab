@@ -449,6 +449,7 @@ Ci          = Ci  ./ ppm2bar;
 %% Collect outputs
 
 biochem_out.A       = A;
+biochem_out.Ag       = Ag;
 biochem_out.Ci      = Ci;
 if ~isempty(Cc)
     biochem_out.Cc = Cc;

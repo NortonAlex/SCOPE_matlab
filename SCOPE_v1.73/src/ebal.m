@@ -245,6 +245,7 @@ while CONT                          % while energy balance does not close
     
     biochem_out         = b(biochem_in);
     Ah                  = biochem_out.A;
+    Agh                 = biochem_out.Ag;
     Cih                 = biochem_out.Ci;
     Fh                  = biochem_out.eta;
     rcwh                = biochem_out.rcw;
@@ -261,6 +262,7 @@ while CONT                          % while energy balance does not close
     biochem_out         = b(biochem_in);
  
     Au                  = biochem_out.A;
+    Agu                 = biochem_out.Ag;
     Ciu                 = biochem_out.Ci;
     Fu                  = biochem_out.eta;
     rcwu                = biochem_out.rcw;
@@ -411,6 +413,7 @@ Rnctot          = LAI*(Fc*Rnch + equations.meanleaf(canopy,Rncu,'angles_and_laye
 lEctot          = LAI*(Fc*lEch + equations.meanleaf(canopy,lEcu,'angles_and_layers',Ps)); % latent heat leaves
 Hctot           = LAI*(Fc*Hch  + equations.meanleaf(canopy,Hcu ,'angles_and_layers',Ps)); % sensible heat leaves
 Actot           = LAI*(Fc*Ah   + equations.meanleaf(canopy,Au  ,'angles_and_layers',Ps)); % photosynthesis leaves
+Agtot           = LAI*(Fc*Agh   + equations.meanleaf(canopy,Agu  ,'angles_and_layers',Ps)); % photosynthesis of leaves excluding Rd
 Tcave           =     (Fc*Tch  + equations.meanleaf(canopy,Tcu ,'angles_and_layers',Ps)); % mean leaf temperature
 Pntot           = LAI*(Fc*Pinh + equations.meanleaf(canopy,Pinu,'angles_and_layers',Ps)); % net PAR leaves
 Pntot_Cab       = LAI*(Fc*Pinh_Cab + equations.meanleaf(canopy,Pinu_Cab,'angles_and_layers',Ps)); % net PAR leaves
@@ -442,6 +445,7 @@ fluxes.Rnctot   = Rnctot; % [W m-2]             canopy net radiation
 fluxes.lEctot   = lEctot; % [W m-2]             canopy latent heat flux
 fluxes.Hctot    = Hctot;  % [W m-2]             canopy sensible heat flux
 fluxes.Actot    = Actot;  % [umol m-2 s-1]      canopy net CO2 uptake
+fluxes.Agtot    = Agtot;  % [umol m-2 s-1]      canopy gross CO2 uptake
 fluxes.Rnstot   = Rnstot; % [W m-2]             soil net radiation
 fluxes.lEstot   = lEstot; % [W m-2]             soil latent heat flux
 fluxes.Hstot    = Hstot;  % [W m-2]             soil sensible heat flux

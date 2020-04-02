@@ -15,9 +15,9 @@ function output_data(Output_dir, options, k, iter, xyt, fluxes, rad, thermal, ga
 
 % fluxes
 fidf                = fopen([Output_dir,'fluxes.dat'],'a');
-fprintf(fidf,'%9.0f %9.0f %9.0f %9.4f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f',...
+fprintf(fidf,'%9.0f %9.0f %9.0f %9.4f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f',...
     [k iter.counter xyt.year(k) xyt.t(k) fluxes.Rntot fluxes.lEtot fluxes.Htot fluxes.Rnctot fluxes.lEctot, ...
-    fluxes.Hctot fluxes.Actot fluxes.Rnstot fluxes.lEstot fluxes.Hstot fluxes.Gtot fluxes.Resp 1E6*fluxes.aPAR  1E6*fluxes.aPAR_Cab fluxes.aPAR/rad.PAR fluxes.aPAR_Wm2 1E6*rad.PAR]);
+    fluxes.Hctot fluxes.Actot fluxes.Agtot fluxes.Rnstot fluxes.lEstot fluxes.Hstot fluxes.Gtot fluxes.Resp 1E6*fluxes.aPAR  1E6*fluxes.aPAR_Cab fluxes.aPAR/rad.PAR fluxes.aPAR_Wm2 1E6*rad.PAR]);
 if options.calc_fluor
     fprintf(fidf,'%9.4f %9.6f', rad.Eoutf,  rad.Eoutf./fluxes.aPAR_Wm2);
 end
