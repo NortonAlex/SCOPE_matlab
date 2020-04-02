@@ -1,21 +1,21 @@
 %The following three are always required,
 
 X = {
-'Simulation_Name'	, 'verification_run';
+'Simulation_Name'	, 'US-NR1-2017';
 'soil_file'		, 'soilnew.txt';
 'leaf_file'		, 'Optipar2017_ProspectD.mat'; 
 'atmos_file' 		, 'FLEX-S3_std.atm';
 
 %The following are only for the time series option!
-'Dataset_dir'		, 'for_verification'; 
-'t_file'		, 't_.dat';
+'Dataset_dir'		, 'US-NR1-2017'; 
+'t_file'		, 'doy_.dat';
 'year_file'		, 'year_.dat';
-'Rin_file'		, 'Rin_.dat';
-'Rli_file'		, 'Rli_.dat';
-'p_file' 		, 'p_.dat';
-'Ta_file'		, 'Ta_.dat';
+'Rin_file'		, 'sw_.dat';
+'Rli_file'		, 'lw_.dat';
+'p_file' 		, 'ps_.dat';
+'Ta_file'		, 'ta_.dat';
 'ea_file'		, 'ea_.dat';
-'u_file'		, 'u_.dat';
+'u_file'		, 'uwnd_.dat';
 
 %optional (leave empty for constant values From inputdata.TXT)
 'CO2_file'		, '';
