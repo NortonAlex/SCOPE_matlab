@@ -251,6 +251,9 @@ while CONT                          % while energy balance does not close
     rcwh                = biochem_out.rcw;
     qEh                 = biochem_out.qE; % vCaemmerer- Magnani does not generate this parameter (dummy value)
     Knh                 = biochem_out.Kn;
+    phi_p_h             = biochem_out.phi_p;
+    phi_fs_h            = biochem_out.phi_fs;
+    phi_npq_h           = biochem_out.phi_npq;
     
     % for sunlit leaves
     biochem_in.T        = Tcu;
@@ -268,6 +271,9 @@ while CONT                          % while energy balance does not close
     rcwu                = biochem_out.rcw;
     qEu                 = biochem_out.qE;
     Knu                 = biochem_out.Kn;
+    phi_p_u             = biochem_out.phi_p;
+    phi_fs_u            = biochem_out.phi_fs;
+    phi_npq_u           = biochem_out.phi_npq;
     
     Pinh                = rad.Pnh;
     Pinu                = rad.Pnu;
@@ -378,7 +384,7 @@ if counter>=maxit
     fprintf(1,'\r');
 end
 
-%% 4. Calculate the output per layer
+%% 4a. Calculate the output per layer
 if options.calc_vert_profiles   
     [Hcu1d  ]           = equations.meanleaf(canopy,Hcu,          'angles');   % [nli,nlo,nl]      mean sens heat sunlit leaves
     [lEcu1d ]           = equations.meanleaf(canopy,lEcu,         'angles');   % [nli,nlo,nl]      mean latent sunlit leaves
@@ -403,6 +409,53 @@ if options.calc_vert_profiles
     %profiles.Pn1d_Cab   = ((1-Ps(1:nl)).*Pinh_Cab + Ps(1:nl).*(Pnu1d_Cab));        %[nl]           mean photos leaves, per layer
     profiles.Rn1d       = ((1-Ps(1:nl)).*Rnch     + Ps(1:nl).*(Rnu1d));        %[nl]
 end
+
+%% 4b. Calculate canopy quantum efficiencies (photochemistry, fluorescence, NPQ (i.e. Kn+Kd) )
+
+% PSII Quantum Yields: Canopy average and top-of-canopy
+% This calculates the average of the leaf level yields. This is 
+% not the same as the fraction of canopy aPAR directed to each
+% PSII quenching process. For that calculation, we would do something
+% like: 
+% meanleaf(canopy,Pnuc_Cab.*yield,'angles_and_layers',Ps)) / & 
+% meanleaf(canopy,Pnuc_Cab,'angles_and_layers',Ps))
+% i.e. (APAR*yield) / APAR
+% First, calculate the layer-average sunlit (Ps) and 
+% shaded (Ph) portion of vegetation (excluding the soil layer)
+Psu_canopymean = mean(Ps(1:nl));
+Psh_canopymean = mean(1.0 - Ps(1:nl));
+
+% Canopy average sunlit yields:
+% - integrate over angles_and_layers then divide by layer-average 
+%   sunlit portion of the vegetation
+P_yieldu       = equations.meanleaf(canopy, phi_p_u,'angles_and_layers',Ps) / Psu_canopymean; % 
+Fs_yieldu       = equations.meanleaf(canopy, phi_fs_u,'angles_and_layers',Ps) / Psu_canopymean; % 
+NPQ_yieldu       = equations.meanleaf(canopy, phi_npq_u,'angles_and_layers',Ps) / Psu_canopymean; % 
+
+% Shaded quantum yields, calculated as average of leaf-level yields:
+% - shaded fluorescence yield
+Fs_yieldh       = mean( phi_fs_h .* (1.0 - Ps(1:nl)) ) / Psh_canopymean;
+% - shaded photochemical yield
+P_yieldh        = mean( phi_p_h .* (1.0 - Ps(1:nl)) ) / Psh_canopymean;
+% - shaded non-photochemical quenching yield
+NPQ_yieldh      = mean( phi_npq_h .* (1.0 - Ps(1:nl)) ) / Psh_canopymean;
+
+
+% Top-of-canopy sunlit yields:
+% - integrate over the angles, then select the top-of-canopy layer value
+[Fs_yieldu_ ]  = equations.meanleaf(canopy,phi_fs_u,'angles');
+[P_yieldu_ ]   = equations.meanleaf(canopy,phi_p_u,'angles');
+[NPQ_yieldu_ ] = equations.meanleaf(canopy,phi_npq_u,'angles');
+
+Fs_yieldu_toc  = Fs_yieldu_(1);
+P_yieldu_toc   = P_yieldu_(1);
+NPQ_yieldu_toc = NPQ_yieldu_(1);
+
+% Top-of-canopy shaded yields:
+% - simply select the top-of-canopy layer value
+Fs_yieldh_toc  = phi_fs_h(1);
+P_yieldh_toc   = phi_p_h(1);
+NPQ_yieldh_toc = phi_npq_h(1);
         
 
 %% 5. Calculate spectrally integrated energy, water and CO2 fluxes
@@ -455,6 +508,18 @@ fluxes.aPAR     = Pntot;  % [umol m-2 s-1]      absorbed PAR
 fluxes.aPAR_Cab = Pntot_Cab;% [umol m-2 s-1]      absorbed PAR
 fluxes.aPAR_Wm2 = Rntot_PAR;% [W m-2]      absorbed PAR
 fluxes.aPAR_Cab_eta = aPAR_Cab_eta;
+fluxes.phi_p_u   = P_yieldu;   % [unitless]     canopy average quantum efficiency of photochemistry (sunlit leaves)
+fluxes.phi_fs_u  = Fs_yieldu;  % [unitless]     canopy average quantum efficiency of fluorescence (sunlit leaves)
+fluxes.phi_npq_u = NPQ_yieldu; % [unitless]     canopy average quantum efficiency of NPQ (Kn+Kd) (sunlit leaves)
+fluxes.phi_p_h   = P_yieldh;   % [unitless]     canopy average quantum efficiency of photochemistry (shaded leaves)
+fluxes.phi_fs_h  = Fs_yieldh;  % [unitless]     canopy average quantum efficiency of fluorescence (shaded leaves)
+fluxes.phi_npq_h = NPQ_yieldh; % [unitless]     canopy average quantum efficiency of NPQ (Kn+Kd) (shaded leaves)
+fluxes.phi_p_u_toc   = P_yieldu_toc;   % [unitless]     top-of-canopy quantum efficiency of photochemistry (sunlit leaves)
+fluxes.phi_fs_u_toc  = Fs_yieldu_toc;  % [unitless]     top-of-canopy quantum efficiency of fluorescence (sunlit leaves)
+fluxes.phi_npq_u_toc = NPQ_yieldu_toc; % [unitless]     top-of-canopy quantum efficiency of NPQ (Kn+Kd) (sunlit leaves)
+fluxes.phi_p_h_toc   = P_yieldh_toc;   % [unitless]     top-of-canopy quantum efficiency of photochemistry (shaded leaves)
+fluxes.phi_fs_h_toc  = Fs_yieldh_toc;  % [unitless]     top-of-canopy quantum efficiency of fluorescence (shaded leaves)
+fluxes.phi_npq_h_toc = NPQ_yieldh_toc; % [unitless]     top-of-canopy quantum efficiency of NPQ (Kn+Kd) (shaded leaves)
 
 thermal.Ta    = Ta;       % [oC]                air temperature (as in input)
 thermal.Ts    = Ts;       % [oC]                soil temperature, sunlit and shaded [2x1]

@@ -124,12 +124,12 @@ end
 if options.save_headers
     fprintf(fidf,'timestep counter year t Rntot lEtot Htot Rnctot lEctot Hctot Actot Agtot Rnstot lEstot Hstot Gtot Resp aPAR aPAR_Cab faPAR aPAR_energyunits iPAR');
     if options.calc_fluor
-        fprintf(fidf,' fluortot fluor_yield');
+        fprintf(fidf,' fluortot fluor_yield phi_p_sunlit phi_fs_sunlit phi_npq_sunlit phi_p_shaded phi_fs_shaded phi_npq_shaded phi_p_sunlit_toc phi_fs_sunlit_toc phi_npq_sunlit_toc phi_p_shaded_toc phi_fs_shaded_toc phi_npq_shaded_toc');
     end
     fprintf(fidf,'\r');
     fprintf(fidf,'""        ""      ""  JulianDay  Wm-2   Wm-2 Wm-2 Wm-2 Wm-2   Wm-2 umolm-2s-1 umolm-2s-1 Wm-2 Wm-2 Wm-2 Wm-2 umolm-2s-1 umolm-2s-1 umolm-2s-1 ""  Wm-2 umolm-2s-1');
     if options.calc_fluor
-        fprintf(fidf,' W m-2 WW^{-1}');
+        fprintf(fidf,' W m-2 WW^{-1} "" "" "" "" "" "" "" "" "" "" "" ""');
     end
     fprintf(fidf,'\r');
     

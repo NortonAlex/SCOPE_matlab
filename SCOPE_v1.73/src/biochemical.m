@@ -438,6 +438,17 @@ ps_rel   = max(0,  1-ps./po0);       % degree of light saturation: 'x' (van der 
 [eta,qE,qQ,fs,fo,fm,fo0,fm0,Kn]    = Fluorescencemodel(ps, ps_rel, Kp,Kf,Kd,Knparams);
 Kpa         = ps./fs*Kf;
 
+% Calculate PSII quantum yields
+% - derived steady-state (light-adapted) photochemistry
+%   rate constant van der Tol et al. (2014)
+Kp_s        = (fm ./ fs - 1.0).*(Kf+Kd+Kn);
+% - non-photochemical quenching rate constant (combined Kn+Kd)
+Knpq        = Kn+Kd;
+% - quantum yields expressed by rate constants (Butler, 1978; van der Tol et al., 2014)
+phi_fs      = Kf ./ (Kn+Kp_s+Kd+Kf);
+phi_p       = Kp_s ./ (Kn+Kp_s+Kd+Kf);
+phi_npq     = Knpq ./ (Kn+Kp_s+Kd+Kf);
+
 %% convert back to ppm
 Cc = [];
 if ~isempty(g_m)
@@ -495,6 +506,9 @@ biochem_out.fm      = fm;
 biochem_out.Fm_Fo    = fm ./ fo;  % parameters used for curve fitting
 biochem_out.Ft_Fo    = fs ./ fo;  % parameters used for curve fitting
 biochem_out.qQ      = qQ;
+biochem_out.phi_fs  = phi_fs;
+biochem_out.phi_p   = phi_p;
+biochem_out.phi_npq = phi_npq;
 return;
 
 end  % end of function biochemical
