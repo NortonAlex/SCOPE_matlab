@@ -45,7 +45,9 @@ fidt            = fopen([Output_dir,'surftemp.dat'],'w');         % surftemp
 fidra           = fopen([Output_dir,'aerodyn.dat'],'w');          % aerodyn
 fidr            = fopen([Output_dir,'radiation.dat'],'w');        % radiation
 fidwl           = fopen([Output_dir,'wl.dat'],'w');               % wavelength
-fidsi           = fopen([Output_dir,'irradiance_spectra.dat'],'w');     % Fluorescence
+fidsi           = fopen([Output_dir,'irradiance_spectra.dat'],'w');     % 
+fidsu           = fopen([Output_dir,'irradiance_spectra_sun.dat'],'w');     % 
+fidsk           = fopen([Output_dir,'irradiance_spectra_sky.dat'],'w');     % 
 fidfho          = fopen([Output_dir,'spectrum_hemis_optical.dat'],'w');   % spectrum hemispherical
 fidfoo          = fopen([Output_dir,'spectrum_obsdir_optical.dat'],'w');  % spectrum observation direction
 fidref          = fopen([Output_dir,'reflectance.dat'],'w');      % reflectance spectrum
@@ -139,8 +141,8 @@ if options.save_headers
     fprintf(fidra, 'raa rawc raws ustar \r');
     fprintf(fidra, 'sm-1 sm-1 sm-1 ms-1 \r');
 
-    fprintf(fidr, 'timestep year t ShortIn LongIn HemisOutShort HemisOutLong HemisOutTot Net \r');
-    fprintf(fidr, '""  ""  JulianDay  Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 Wm-2\r');
+    fprintf(fidr, 'timestep year t ShortIn LongIn HemisOutShort HemisOutLong HemisOutTot Net Esun_toto Esky_toto \r');
+    fprintf(fidr, '""  ""  JulianDay  Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 \r');
 
     fprintf(fidfho, 'hemispherically integrated radiation spectrum \r');
     fprintf(fidfho, 'W m-2 um-1 \r');
@@ -163,8 +165,14 @@ if options.save_headers
     fprintf(fidwl, 'wavelengths of the spectral output files \r');
     fprintf(fidwl, 'um \r');
     
-    fprintf(fidsi, 'irradiance \r');
+    fprintf(fidsi, 'irradiance\r');
     fprintf(fidsi, 'W m-2 um-1\r');
+    
+    fprintf(fidsu, 'irradiance_sun\r');
+    fprintf(fidsu, 'W m-2 um-1\r');
+    
+    fprintf(fidsk, 'irradiance_sky\r');
+    fprintf(fidsk, 'W m-2 um-1\r');
     
     fprintf(fidref, 'reflectance \r');
     fprintf(fidref, 'fraction of radiation in observation direction *pi / irradiance \r');

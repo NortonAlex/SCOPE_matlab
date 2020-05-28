@@ -464,6 +464,9 @@ rad.PAR     = P;            % [1 double]        incident spectrally integrated P
 
 rad.fEsuno  = fEsuno;       % [2162x1 double]   normalized spectrum of direct light (optical)
 rad.fEskyo  = fEskyo;       % [2162x1 double]   normalized spectrum of diffuse light (optical)
+rad.Esun_toto = 0.001 * helpers.Sint(meteo.Rin*fEsuno(J_o),wl(J_o)); % [1 double]  integrated optical incident solar radiation (W m-2), equivalent to: 0.001 * helpers.Sint(meteo.Rin*fEsuno(J_o),wl(J_o))
+rad.Esky_toto = 0.001 * helpers.Sint(meteo.Rin*fEskyo(J_o),wl(J_o)); % [1 double]  integrated optical incident sky radiation (W m-2), equivalent to: 0.001 * helpers.Sint(meteo.Rin*fEskyo(J_o),wl(J_o))
+
 rad.fEsunt  = fEsunt;       % [2162x1 double]   normalized spectrum of direct light (thermal)
 rad.fEskyt  = fEskyt;       % [2162x1 double]   normalized spectrum of diffuse light (thermal)
 

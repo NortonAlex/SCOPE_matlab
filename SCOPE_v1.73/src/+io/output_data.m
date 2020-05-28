@@ -41,7 +41,7 @@ fprintf(fidra,'\r');
 
 % radiation
 fidr                = fopen([Output_dir,'radiation.dat'],'a');
-fprintf(fidr,'%9.0f  %9.0f %9.4f %9.2f %9.2f %9.2f %9.2f  %9.2f %9.2f',[k xyt.year(k) xyt.t(k) meteo.Rin meteo.Rli rad.Eouto rad.Eoutt + rad.Eoutte  rad.Eouto+rad.Eoutt + rad.Eoutte fluxes.Rntot]);
+fprintf(fidr,'%9.0f  %9.0f %9.4f %9.2f %9.2f %9.2f %9.2f  %9.2f %9.2f %9.2f %9.2f',[k xyt.year(k) xyt.t(k) meteo.Rin meteo.Rli rad.Eouto rad.Eoutt + rad.Eoutte  rad.Eouto+rad.Eoutt + rad.Eoutte fluxes.Rntot rad.Esun_toto rad.Esky_toto]);
 fprintf(fidr,'\r');
 
 % spectrum (added on 19 September 2008)
@@ -70,8 +70,16 @@ if options.calc_ebal
 end
 
 fidsi           = fopen([Output_dir,'irradiance_spectra.dat'],'a');
-fprintf(fidsi,'%10.2f',meteo.Rin*(rad.fEsuno+rad.fEskyo)');
+fprintf(fidsi,'%10.2f',meteo.Rin*(rad.fEsuno+rad.fEskyo));
 fprintf(fidsi,'\r');
+
+fidsu           = fopen([Output_dir,'irradiance_spectra_sun.dat'],'a');
+fprintf(fidsu,'%10.2f',meteo.Rin*(rad.fEsuno));
+fprintf(fidsu,'\r');
+
+fidsk           = fopen([Output_dir,'irradiance_spectra_sky.dat'],'a');
+fprintf(fidsk,'%10.2f',meteo.Rin*(rad.fEskyo));
+fprintf(fidsk,'\r');
 
 fidref           = fopen([Output_dir,'reflectance.dat'],'a');
 reflectance = pi*rad.Lo_./(rad.Esun_+rad.Esky_);
