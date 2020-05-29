@@ -57,6 +57,7 @@ if ~useXLSX
     % 1: time series (uses text files with meteo input as time series)
     % 2: Lookup-Table (specify the values to be included)
     % 3: Lookup-Table with random input (specify the ranges of values)
+    options.dynamic_azimuth     = N(19);    % 0; calculate the relative azimuth (psi) each time step given a fixed observation azimuth angle
 else
     options = io.readStructFromExcel(['../' char(parameter_file)], 'options', 3, 1);
 end

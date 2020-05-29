@@ -32,6 +32,13 @@ else
     ttsR            = equations.calczenithangle(DOY_,time_ - xyt.timezn ,0,0,xyt.LON,xyt.LAT);     %sun zenith angle in rad
     V(51).Val       = min(85,ttsR/constants.deg2rad);                         %sun zenith angle in deg
 end
+
+% optional calculation the sun azimuth and sun-sensor relative azimuth angle (psi) dynamically 
+if options.dynamic_azimuth
+    relazi     = equations.calcazimuthangle(DOY_,time_ - xyt.timezn,xyt.LON,xyt.LAT,V(65).Val,V(51).Val);
+    V(53).Val  = relazi;
+end
+
 %% 2. Radiation 
 if ~isempty(Rin_file)
     V(30).Val           = load([path_input,Dataset_dir,'/',Rin_file]);
