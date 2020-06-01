@@ -450,6 +450,10 @@ gap.K       = K;
 gap.Ps      = Ps;
 gap.Po      = Po;
 
+rad.tts     = tts;
+rad.psi     = psi;
+rad.sazi    = angles.sazi;
+
 rad.rsd     = rsd;
 rad.rdd     = rdd;
 rad.rdo     = rdo;

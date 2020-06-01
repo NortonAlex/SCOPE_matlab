@@ -75,6 +75,7 @@ angles.tts = V(51).Val(vi(51));
 angles.tto = V(52).Val(vi(52));
 angles.psi = V(53).Val(vi(53));
 angles.vazi = V(65).Val(vi(65));
+angles.sazi = V(66).Val(vi(66));
 
 
 %% derived input

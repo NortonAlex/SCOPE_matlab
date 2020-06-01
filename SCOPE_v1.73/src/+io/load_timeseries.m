@@ -35,8 +35,10 @@ end
 
 % optional calculation the sun azimuth and sun-sensor relative azimuth angle (psi) dynamically 
 if options.dynamic_azimuth
-    relazi     = equations.calcazimuthangle(DOY_,time_ - xyt.timezn,xyt.LON,xyt.LAT,V(65).Val,V(51).Val);
+    [sazi, relazi]     = equations.calcazimuthangle(DOY_,time_ - xyt.timezn,xyt.LON,xyt.LAT,V(65).Val,V(51).Val);
     V(53).Val  = relazi;
+    % add the sun azimuth angle to the V structure
+    V(66).Val  = sazi;
 end
 
 %% 2. Radiation 

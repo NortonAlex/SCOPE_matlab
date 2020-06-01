@@ -141,8 +141,8 @@ if options.save_headers
     fprintf(fidra, 'raa rawc raws ustar \r');
     fprintf(fidra, 'sm-1 sm-1 sm-1 ms-1 \r');
 
-    fprintf(fidr, 'timestep year t ShortIn LongIn HemisOutShort HemisOutLong HemisOutTot Net Esun_toto Esky_toto \r');
-    fprintf(fidr, '""  ""  JulianDay  Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 \r');
+    fprintf(fidr, 'timestep year t sza sazi psi ShortIn LongIn HemisOutShort HemisOutLong HemisOutTot Net Esun_toto Esky_toto \r');
+    fprintf(fidr, '""  "" "" "" "" JulianDay  Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 Wm-2 \r');
 
     fprintf(fidfho, 'hemispherically integrated radiation spectrum \r');
     fprintf(fidfho, 'W m-2 um-1 \r');

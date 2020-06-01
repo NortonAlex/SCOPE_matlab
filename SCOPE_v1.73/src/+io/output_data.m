@@ -41,7 +41,7 @@ fprintf(fidra,'\r');
 
 % radiation
 fidr                = fopen([Output_dir,'radiation.dat'],'a');
-fprintf(fidr,'%9.0f  %9.0f %9.4f %9.2f %9.2f %9.2f %9.2f  %9.2f %9.2f %9.2f %9.2f',[k xyt.year(k) xyt.t(k) meteo.Rin meteo.Rli rad.Eouto rad.Eoutt + rad.Eoutte  rad.Eouto+rad.Eoutt + rad.Eoutte fluxes.Rntot rad.Esun_toto rad.Esky_toto]);
+fprintf(fidr,'%9.0f  %9.0f %9.4f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f %9.2f  %9.2f %9.2f %9.2f %9.2f',[k xyt.year(k) xyt.t(k) rad.tts rad.sazi rad.psi meteo.Rin meteo.Rli rad.Eouto rad.Eoutt + rad.Eoutte  rad.Eouto+rad.Eoutt + rad.Eoutte fluxes.Rntot rad.Esun_toto rad.Esky_toto]);
 fprintf(fidr,'\r');
 
 % spectrum (added on 19 September 2008)
