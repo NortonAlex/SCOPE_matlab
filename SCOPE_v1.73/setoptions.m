@@ -16,6 +16,6 @@ N=[
 1;		%verify		verifiy the results (compare to saved 'standard' output) to test the code for the firstt ime
 1;		%saveheaders		write header lines in output files
 0;		%makeplots 		plot the results
-1];		%simulation		0: individual runs. Specify one value for constant input, and an equal number (>1) of values for all input that varies between the runs.
-		%		1: time series (uses text files with meteo input as time series)
-		%		2: Lookup-Table (specify the values to be included. All possible combinations of inputs will be  used)
+1;      %simulation		0: individual runs. Specify one value for constant input, and an equal number (>1) of values for all input that varies between the runs; 1: time series (uses text files with meteo input as time series); 2: Lookup-Table (specify the values to be included. All possible combinations of inputs will be  used)
+0];		%dynamic_azimuth    0: calculate the azimuthal difference between solar and observation angle (psi) according to a fixed observation azimuth angle (i.e. psi varies according to the sun-sensor geometry)
+				

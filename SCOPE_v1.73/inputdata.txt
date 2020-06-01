@@ -88,3 +88,5 @@ Angles
 tts	30						deg	solar zenith angle
 tto	0						deg	observation zenith angle
 psi	90						deg	azimuthal difference between solar and observation angle
+vazi	180						deg	fixed point observation azimuth angle e.g. 180=North (only used if options.dynamic_azimuth = 1)
+sazi	0						deg	solar azimuth angle
