@@ -78,15 +78,15 @@ rbs	10						s m-1	soil boundary layer resistance
 rwc	0						s m-1	within canopy layer resistance
 								
 timeseries (this option is only for time series)								
-startDOY	1.01							Julian day (decimal) of start of simulations
-endDOY	365.99							Julian day (decimal) of end of simulations
-LAT	53.95						decimal deg	Latitude
-LON	254.88						decimal deg	Longitude
-timezn 	-6						hours	east of Greenwich
+startDOY	204.01							Julian day (decimal) of start of simulations
+endDOY	204.99							Julian day (decimal) of end of simulations
+LAT	53.987						decimal deg	Latitude
+LON	254.883						decimal deg	Longitude
+timezn 	18						hours	east of Greenwich
 								
 Angles								
 tts	30						deg	solar zenith angle
-tto	0						deg	observation zenith angle
+tto	45						deg	observation zenith angle
 psi	90						deg	azimuthal difference between solar and observation angle
 vazi	180						deg	fixed point observation azimuth angle e.g. 180=North (only used if options.dynamic_azimuth = 1)
 sazi	0						deg	solar azimuth angle
