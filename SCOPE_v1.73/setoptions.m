@@ -17,5 +17,5 @@ N=[
 1;		%saveheaders		write header lines in output files
 0;		%makeplots 		plot the results
 1;      %simulation		0: individual runs. Specify one value for constant input, and an equal number (>1) of values for all input that varies between the runs; 1: time series (uses text files with meteo input as time series); 2: Lookup-Table (specify the values to be included. All possible combinations of inputs will be  used)
-1];		%dynamic_azimuth    0: calculate the azimuthal difference between solar and observation angle (psi) according to a fixed observation azimuth angle (i.e. psi varies according to the sun-sensor geometry)
-				
+1;		%dynamic_azimuth    0: calculate the azimuthal difference between solar and observation angle (psi) according to a fixed observation azimuth angle (i.e. psi varies according to the sun-sensor geometry)
+1];      %use_prescribed_spectra    0: use the MODTRAN atmospheric transfer functions (from "atmos_file") to compute top-of-canopy spectra. 1: use prescribed spectra (one for direct, one for diffuse) as the top-of-canopy spectra

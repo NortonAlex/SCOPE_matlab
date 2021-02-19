@@ -309,6 +309,10 @@ Ls      = equations.Planck(wl,atmo.Ta+273.15);
 Esun_   = pi*t1.*t4;
 Esky_   = pi./(1-t3.*rdd).*(t1.*(t5+t12.*rsd)+Fd+(1-rdd).*Ls.*t3+t16);
 
+if options.use_prescribed_spectra == 1
+    fprintf(1,'%s %s %s\n','warning: using prescribed top-of-canopy spectra');
+end
+
 % fractional contributions of Esun and Esky to total incident radiation in
 % optical and thermal parts of the spectrum
 [fEsuno,fEskyo,fEsunt,fEskyt]          = deal(0*Esun_);   %initialization

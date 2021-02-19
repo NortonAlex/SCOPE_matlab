@@ -58,6 +58,7 @@ if ~useXLSX
     % 2: Lookup-Table (specify the values to be included)
     % 3: Lookup-Table with random input (specify the ranges of values)
     options.dynamic_azimuth     = N(19);    % 0; calculate the relative azimuth (psi) each time step given a fixed observation azimuth angle
+    options.use_prescribed_spectra = N(20);    % 0: use the MODTRAN atmospheric transfer functions (from "atmos_file") to compute top-of-canopy spectra. 1: use prescribed spectra (one for direct, one for diffuse) as the top-of-canopy spectra
 else
     options = io.readStructFromExcel(['../' char(parameter_file)], 'options', 3, 1);
 end

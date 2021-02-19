@@ -5,6 +5,8 @@ X = {
 'soil_file'		, 'soilnew.txt';
 'leaf_file'		, 'Optipar2017_ProspectD.mat'; 
 'atmos_file' 		, 'FLEX-S3_V80.atm';
+'Esun_spectra_file'     , 'Kaniva_hyperspectral_direct.csv';
+'Esky_spectra_file'     , 'Kaniva_hyperspectral_diffuse.csv';
 
 %The following are only for the time series option!
 'Dataset_dir'		, 'CA-OBS-2019'; 
