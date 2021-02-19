@@ -6,7 +6,6 @@ function [M] = aggreg_hyperspectral(spectralfile,SCOPEspec)
 % Read file with prescribed spectral data
 tindex = 2 + 1;
 
-spectralfile = '/Users/jnorton/Projects/Thompson/Kaniva_hyperspectral_direct.csv';
 s   = importdata(spectralfile);
 wlM = s(2,:);
 T   = s(tindex,:);

@@ -311,6 +311,8 @@ Esky_   = pi./(1-t3.*rdd).*(t1.*(t5+t12.*rsd)+Fd+(1-rdd).*Ls.*t3+t16);
 
 if options.use_prescribed_spectra == 1
     fprintf(1,'%s %s %s\n','warning: using prescribed top-of-canopy spectra');
+    Esun_ = helpers.aggreg_hyperspectral('/Users/jnorton/Models/SCOPE/data/input/radiationdata/Kaniva_hyperspectral_direct.csv',spectral.SCOPEspec);
+    Esky_ = helpers.aggreg_hyperspectral('/Users/jnorton/Models/SCOPE/data/input/radiationdata/Kaniva_hyperspectral_diffuse.csv',spectral.SCOPEspec);
 end
 
 % fractional contributions of Esun and Esky to total incident radiation in
